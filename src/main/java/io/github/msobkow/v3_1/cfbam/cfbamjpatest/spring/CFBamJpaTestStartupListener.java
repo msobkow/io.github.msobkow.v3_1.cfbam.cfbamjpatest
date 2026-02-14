@@ -71,6 +71,10 @@ public class CFBamJpaTestStartupListener {
 		ICFIntSchema.getBackingCFInt().wireTableTableInstances();
 		ICFBamSchema.getBackingCFBam().wireTableTableInstances();
 
+		ICFSecSchema.getBackingCFSec().bootstrapSchema();
+		ICFIntSchema.getBackingCFInt().bootstrapSchema();
+		ICFBamSchema.getBackingCFBam().bootstrapSchema();
+
         System.err.println("Executing testCFSec.performTests()");
         try {
             String response = testCFSec.performTests(null);
