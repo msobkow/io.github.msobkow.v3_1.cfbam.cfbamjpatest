@@ -40,6 +40,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
+import java.util.concurrent.atomic.*;
+import org.springframework.beans.BeansException;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import io.github.msobkow.v3_1.cflib.*;
 import io.github.msobkow.v3_1.cflib.dbutil.*;
 import io.github.msobkow.v3_1.cfsec.cfsec.*;
@@ -50,7 +54,7 @@ import io.github.msobkow.v3_1.cfint.cfint.jpa.*;
 import io.github.msobkow.v3_1.cfbam.cfbam.jpa.*;
 
 @Component
-public class CFBamJpaTestStartupListener {
+public class CFBamJpaTestStartupListener implements ApplicationContextAware {
     @Autowired
     // @Qualifier("TestCFSec")
     private CFSecJpaTestTestSchema testCFSec;
@@ -63,9 +67,25 @@ public class CFBamJpaTestStartupListener {
     // @Qualifier("TestCFBam")
     private CFBamJpaTestTestSchema testCFBam;
 
-    @EventListener
+
+	static final AtomicReference<ApplicationContext> arApplicationContext = new AtomicReference<>();
+
+	@Override
+	public void setApplicationContext(final ApplicationContext applicationContext) throws BeansException {
+		arApplicationContext.compareAndSet(arApplicationContext.get(), applicationContext);
+	}
+
+	public static ApplicationContext getApplicationContext() {
+		return( arApplicationContext.get() );
+	}
+
+	@EventListener
     public void onApplicationReady(ApplicationReadyEvent event) {
         System.err.println("CFBamJpaTest StartupListener tests beginning...");
+
+		ICFSecSchema.getBackingCFSec().setApplicationContext(getApplicationContext());
+		ICFIntSchema.getBackingCFInt().setApplicationContext(getApplicationContext());
+		ICFBamSchema.getBackingCFBam().setApplicationContext(getApplicationContext());
 
 		ICFSecSchema.getBackingCFSec().wireTableTableInstances();
 		ICFIntSchema.getBackingCFInt().wireTableTableInstances();
