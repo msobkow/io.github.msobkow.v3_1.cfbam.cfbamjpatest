@@ -40,6 +40,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Qualifier;
 import java.util.concurrent.atomic.*;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
@@ -79,6 +80,19 @@ public class CFBamJpaTestStartupListener implements ApplicationContextAware {
 		return( arApplicationContext.get() );
 	}
 
+
+	@Autowired
+	@Qualifier("cfsec31JpaHooksSchema")
+	private CFSecJpaHooksSchema cfsecJpaHooksSchema;
+
+	@Autowired
+	@Qualifier("cfint31JpaHooksSchema")
+	private CFIntJpaHooksSchema cfintJpaHooksSchema;
+
+	@Autowired
+	@Qualifier("cfbam31JpaHooksSchema")
+	private CFBamJpaHooksSchema cfbamJpaHooksSchema;
+
 	@EventListener
     public void onApplicationReady(ApplicationReadyEvent event) {
         System.err.println("CFBamJpaTest StartupListener tests beginning...");
@@ -86,6 +100,11 @@ public class CFBamJpaTestStartupListener implements ApplicationContextAware {
 		ICFSecSchema.getBackingCFSec().setApplicationContext(getApplicationContext());
 		ICFIntSchema.getBackingCFInt().setApplicationContext(getApplicationContext());
 		ICFBamSchema.getBackingCFBam().setApplicationContext(getApplicationContext());
+
+		((CFSecJpaSchema)ICFSecSchema.getBackingCFSec()).setJpaHooksSchema(cfsecJpaHooksSchema);
+		((CFIntJpaSchema)ICFIntSchema.getBackingCFInt()).setJpaHooksSchema(cfintJpaHooksSchema);
+		((CFBamJpaSchema)ICFBamSchema.getBackingCFBam()).setJpaHooksSchema(cfbamJpaHooksSchema);
+
 
 		ICFSecSchema.getBackingCFSec().wireTableTableInstances();
 		ICFIntSchema.getBackingCFInt().wireTableTableInstances();
