@@ -75,6 +75,9 @@ public class CFSecJpaTestTestSchema {
 	private CFSecJpaClusterService cFSecClusterService;
 
 	@Autowired
+	private CFSecJpaTenantService cFSecTenantService;
+
+	@Autowired
 	private CFSecJpaISOCcyService cFSecISOCcyService;
 
 	@Autowired
@@ -134,9 +137,6 @@ public class CFSecJpaTestTestSchema {
 	@Autowired
 	private CFSecJpaSysClusterService cFSecSysClusterService;
 
-	@Autowired
-	private CFSecJpaTenantService cFSecTenantService;
-
     @Transactional(propagation = Propagation.REQUIRES_NEW, noRollbackFor = NoResultException.class, transactionManager = "cfsec31TransactionManager")
     // @PersistenceContext(unitName = "CFSec31PU")
     public String performTests(EntityManager em) {
@@ -147,6 +147,14 @@ public class CFSecJpaTestTestSchema {
 		}
 		else {
 			messages.append("Retrieved " + clusterResults.size() + " entities from CFSec.Cluster\n");
+		}
+
+		List<?> tenantResults = cFSecTenantService.findAll();
+		if (tenantResults == null) {
+			messages.append("Erroneously retrieved null for CFSecTenantService.findAll()\n");
+		}
+		else {
+			messages.append("Retrieved " + tenantResults.size() + " entities from CFSec.Tenant\n");
 		}
 
 		List<?> iSOCcyResults = cFSecISOCcyService.findAll();
@@ -307,14 +315,6 @@ public class CFSecJpaTestTestSchema {
 		}
 		else {
 			messages.append("Retrieved " + sysClusterResults.size() + " entities from CFSec.SysCluster\n");
-		}
-
-		List<?> tenantResults = cFSecTenantService.findAll();
-		if (tenantResults == null) {
-			messages.append("Erroneously retrieved null for CFSecTenantService.findAll()\n");
-		}
-		else {
-			messages.append("Retrieved " + tenantResults.size() + " entities from CFSec.Tenant\n");
 		}
 
 		messages.append("CFSec tests complete\n");
