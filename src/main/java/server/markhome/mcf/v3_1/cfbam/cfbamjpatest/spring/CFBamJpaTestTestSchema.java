@@ -97,6 +97,15 @@ public class CFBamJpaTestTestSchema {
 	private CFBamJpaTableService cFBamTableService;
 
 	@Autowired
+	private CFBamJpaTweakService cFBamTweakService;
+
+	@Autowired
+	private CFBamJpaTableTweakService cFBamTableTweakService;
+
+	@Autowired
+	private CFBamJpaSchemaTweakService cFBamSchemaTweakService;
+
+	@Autowired
 	private CFBamJpaValueService cFBamValueService;
 
 	@Autowired
@@ -541,6 +550,30 @@ public class CFBamJpaTestTestSchema {
 		}
 		else {
 			messages.append("Retrieved " + tableResults.size() + " entities from CFBam.Table\n");
+		}
+
+		List<?> tweakResults = cFBamTweakService.findAll();
+		if (tweakResults == null) {
+			messages.append("Erroneously retrieved null for CFBamTweakService.findAll()\n");
+		}
+		else {
+			messages.append("Retrieved " + tweakResults.size() + " entities from CFBam.Tweak\n");
+		}
+
+		List<?> tableTweakResults = cFBamTableTweakService.findAll();
+		if (tableTweakResults == null) {
+			messages.append("Erroneously retrieved null for CFBamTableTweakService.findAll()\n");
+		}
+		else {
+			messages.append("Retrieved " + tableTweakResults.size() + " entities from CFBam.TableTweak\n");
+		}
+
+		List<?> schemaTweakResults = cFBamSchemaTweakService.findAll();
+		if (schemaTweakResults == null) {
+			messages.append("Erroneously retrieved null for CFBamSchemaTweakService.findAll()\n");
+		}
+		else {
+			messages.append("Retrieved " + schemaTweakResults.size() + " entities from CFBam.SchemaTweak\n");
 		}
 
 		List<?> valueResults = cFBamValueService.findAll();
