@@ -102,6 +102,12 @@ public class CFSecJpaTestTestSchema {
 	private CFSecJpaSecUserPasswordService cFSecSecUserPasswordService;
 
 	@Autowired
+	private CFSecJpaSecUserEMConfService cFSecSecUserEMConfService;
+
+	@Autowired
+	private CFSecJpaSecUserPWResetService cFSecSecUserPWResetService;
+
+	@Autowired
 	private CFSecJpaSecUserPWHistoryService cFSecSecUserPWHistoryService;
 
 	@Autowired
@@ -219,6 +225,22 @@ public class CFSecJpaTestTestSchema {
 		}
 		else {
 			messages.append("Retrieved " + secUserPasswordResults.size() + " entities from CFSec.SecUserPassword\n");
+		}
+
+		List<?> secUserEMConfResults = cFSecSecUserEMConfService.findAll();
+		if (secUserEMConfResults == null) {
+			messages.append("Erroneously retrieved null for CFSecSecUserEMConfService.findAll()\n");
+		}
+		else {
+			messages.append("Retrieved " + secUserEMConfResults.size() + " entities from CFSec.SecUserEMConf\n");
+		}
+
+		List<?> secUserPWResetResults = cFSecSecUserPWResetService.findAll();
+		if (secUserPWResetResults == null) {
+			messages.append("Erroneously retrieved null for CFSecSecUserPWResetService.findAll()\n");
+		}
+		else {
+			messages.append("Retrieved " + secUserPWResetResults.size() + " entities from CFSec.SecUserPWReset\n");
 		}
 
 		List<?> secUserPWHistoryResults = cFSecSecUserPWHistoryService.findAll();
