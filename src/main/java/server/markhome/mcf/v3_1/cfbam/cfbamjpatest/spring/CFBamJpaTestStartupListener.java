@@ -121,9 +121,7 @@ public class CFBamJpaTestStartupListener implements ApplicationContextAware {
 		ICFIntSchema.getBackingCFInt().wireTableTableInstances();
 		ICFBamSchema.getBackingCFBam().wireTableTableInstances();
 
-		ICFSecSchema.getBackingCFSec().bootstrapSchema();
-		ICFIntSchema.getBackingCFInt().bootstrapSchema();
-		ICFBamSchema.getBackingCFBam().bootstrapSchema();
+		ICFBamSchema.getBackingCFBam().bootstrapSchema(ICFBamSchema.getConsolidatedTableInfo());
 
         System.err.println("Executing testCFSec.performTests()");
         try {
