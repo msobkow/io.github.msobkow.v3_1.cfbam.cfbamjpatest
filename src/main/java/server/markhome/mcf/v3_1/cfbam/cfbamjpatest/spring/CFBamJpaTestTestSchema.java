@@ -106,6 +106,9 @@ public class CFBamJpaTestTestSchema {
 	private CFBamJpaSchemaTweakService cFBamSchemaTweakService;
 
 	@Autowired
+	private CFBamJpaIndexTweakService cFBamIndexTweakService;
+
+	@Autowired
 	private CFBamJpaValueService cFBamValueService;
 
 	@Autowired
@@ -574,6 +577,14 @@ public class CFBamJpaTestTestSchema {
 		}
 		else {
 			messages.append("Retrieved " + schemaTweakResults.size() + " entities from CFBam.SchemaTweak\n");
+		}
+
+		List<?> indexTweakResults = cFBamIndexTweakService.findAll();
+		if (indexTweakResults == null) {
+			messages.append("Erroneously retrieved null for CFBamIndexTweakService.findAll()\n");
+		}
+		else {
+			messages.append("Retrieved " + indexTweakResults.size() + " entities from CFBam.IndexTweak\n");
 		}
 
 		List<?> valueResults = cFBamValueService.findAll();
