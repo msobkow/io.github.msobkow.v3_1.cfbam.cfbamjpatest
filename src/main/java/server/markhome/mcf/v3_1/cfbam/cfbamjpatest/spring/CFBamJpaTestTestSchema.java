@@ -495,6 +495,12 @@ public class CFBamJpaTestTestSchema {
 	@Autowired
 	private CFBamJpaUuid6GenService cFBamUuid6GenService;
 
+	@Autowired
+	private CFBamJpaRoleDefService cFBamRoleDefService;
+
+	@Autowired
+	private CFBamJpaSchemaRoleService cFBamSchemaRoleService;
+
     @Transactional(propagation = Propagation.REQUIRES_NEW, noRollbackFor = NoResultException.class, transactionManager = "cfbam31TransactionManager")
     // @PersistenceContext(unitName = "CFBam31PU")
     public String performTests(EntityManager em) {
@@ -1617,6 +1623,22 @@ public class CFBamJpaTestTestSchema {
 		}
 		else {
 			messages.append("Retrieved " + uuid6GenResults.size() + " entities from CFBam.Uuid6Gen\n");
+		}
+
+		List<?> roleDefResults = cFBamRoleDefService.findAll();
+		if (roleDefResults == null) {
+			messages.append("Erroneously retrieved null for CFBamRoleDefService.findAll()\n");
+		}
+		else {
+			messages.append("Retrieved " + roleDefResults.size() + " entities from CFBam.RoleDef\n");
+		}
+
+		List<?> schemaRoleResults = cFBamSchemaRoleService.findAll();
+		if (schemaRoleResults == null) {
+			messages.append("Erroneously retrieved null for CFBamSchemaRoleService.findAll()\n");
+		}
+		else {
+			messages.append("Retrieved " + schemaRoleResults.size() + " entities from CFBam.SchemaRole\n");
 		}
 
 		messages.append("CFBam tests complete\n");
