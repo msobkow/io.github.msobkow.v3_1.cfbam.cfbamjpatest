@@ -123,28 +123,22 @@ public class CFSecJpaTestTestSchema {
 	private CFSecJpaSecClusGrpService cFSecSecClusGrpService;
 
 	@Autowired
-	private CFSecJpaSecClusGrpIncService cFSecSecClusGrpIncService;
-
-	@Autowired
 	private CFSecJpaSecClusGrpMembService cFSecSecClusGrpMembService;
 
 	@Autowired
 	private CFSecJpaSecTentGrpService cFSecSecTentGrpService;
 
 	@Autowired
-	private CFSecJpaSecTentGrpIncService cFSecSecTentGrpIncService;
-
-	@Autowired
 	private CFSecJpaSecTentGrpMembService cFSecSecTentGrpMembService;
 
 	@Autowired
-	private CFSecJpaSecRoleService cFSecSecRoleService;
+	private CFSecJpaSecSysRoleService cFSecSecSysRoleService;
 
 	@Autowired
-	private CFSecJpaSecRoleEnablesService cFSecSecRoleEnablesService;
+	private CFSecJpaSecSysRoleEnablesService cFSecSecSysRoleEnablesService;
 
 	@Autowired
-	private CFSecJpaSecRoleMembService cFSecSecRoleMembService;
+	private CFSecJpaSecSysRoleMembService cFSecSecSysRoleMembService;
 
 	@Autowired
 	private CFSecJpaSecClusRoleService cFSecSecClusRoleService;
@@ -304,14 +298,6 @@ public class CFSecJpaTestTestSchema {
 			messages.append("Retrieved " + secClusGrpResults.size() + " entities from CFSec.SecClusGrp\n");
 		}
 
-		List<?> secClusGrpIncResults = cFSecSecClusGrpIncService.findAll();
-		if (secClusGrpIncResults == null) {
-			messages.append("Erroneously retrieved null for CFSecSecClusGrpIncService.findAll()\n");
-		}
-		else {
-			messages.append("Retrieved " + secClusGrpIncResults.size() + " entities from CFSec.SecClusGrpInc\n");
-		}
-
 		List<?> secClusGrpMembResults = cFSecSecClusGrpMembService.findAll();
 		if (secClusGrpMembResults == null) {
 			messages.append("Erroneously retrieved null for CFSecSecClusGrpMembService.findAll()\n");
@@ -328,14 +314,6 @@ public class CFSecJpaTestTestSchema {
 			messages.append("Retrieved " + secTentGrpResults.size() + " entities from CFSec.SecTentGrp\n");
 		}
 
-		List<?> secTentGrpIncResults = cFSecSecTentGrpIncService.findAll();
-		if (secTentGrpIncResults == null) {
-			messages.append("Erroneously retrieved null for CFSecSecTentGrpIncService.findAll()\n");
-		}
-		else {
-			messages.append("Retrieved " + secTentGrpIncResults.size() + " entities from CFSec.SecTentGrpInc\n");
-		}
-
 		List<?> secTentGrpMembResults = cFSecSecTentGrpMembService.findAll();
 		if (secTentGrpMembResults == null) {
 			messages.append("Erroneously retrieved null for CFSecSecTentGrpMembService.findAll()\n");
@@ -344,28 +322,28 @@ public class CFSecJpaTestTestSchema {
 			messages.append("Retrieved " + secTentGrpMembResults.size() + " entities from CFSec.SecTentGrpMemb\n");
 		}
 
-		List<?> secRoleResults = cFSecSecRoleService.findAll();
-		if (secRoleResults == null) {
-			messages.append("Erroneously retrieved null for CFSecSecRoleService.findAll()\n");
+		List<?> secSysRoleResults = cFSecSecSysRoleService.findAll();
+		if (secSysRoleResults == null) {
+			messages.append("Erroneously retrieved null for CFSecSecSysRoleService.findAll()\n");
 		}
 		else {
-			messages.append("Retrieved " + secRoleResults.size() + " entities from CFSec.SecRole\n");
+			messages.append("Retrieved " + secSysRoleResults.size() + " entities from CFSec.SecSysRole\n");
 		}
 
-		List<?> secRoleEnablesResults = cFSecSecRoleEnablesService.findAll();
-		if (secRoleEnablesResults == null) {
-			messages.append("Erroneously retrieved null for CFSecSecRoleEnablesService.findAll()\n");
+		List<?> secSysRoleEnablesResults = cFSecSecSysRoleEnablesService.findAll();
+		if (secSysRoleEnablesResults == null) {
+			messages.append("Erroneously retrieved null for CFSecSecSysRoleEnablesService.findAll()\n");
 		}
 		else {
-			messages.append("Retrieved " + secRoleEnablesResults.size() + " entities from CFSec.SecRoleEnables\n");
+			messages.append("Retrieved " + secSysRoleEnablesResults.size() + " entities from CFSec.SecSysRoleEnables\n");
 		}
 
-		List<?> secRoleMembResults = cFSecSecRoleMembService.findAll();
-		if (secRoleMembResults == null) {
-			messages.append("Erroneously retrieved null for CFSecSecRoleMembService.findAll()\n");
+		List<?> secSysRoleMembResults = cFSecSecSysRoleMembService.findAll();
+		if (secSysRoleMembResults == null) {
+			messages.append("Erroneously retrieved null for CFSecSecSysRoleMembService.findAll()\n");
 		}
 		else {
-			messages.append("Retrieved " + secRoleMembResults.size() + " entities from CFSec.SecRoleMemb\n");
+			messages.append("Retrieved " + secSysRoleMembResults.size() + " entities from CFSec.SecSysRoleMemb\n");
 		}
 
 		List<?> secClusRoleResults = cFSecSecClusRoleService.findAll();
