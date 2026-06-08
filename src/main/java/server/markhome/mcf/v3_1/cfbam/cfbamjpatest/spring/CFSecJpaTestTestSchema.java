@@ -78,6 +78,9 @@ public class CFSecJpaTestTestSchema {
 	private CFSecJpaTenantService cFSecTenantService;
 
 	@Autowired
+	private CFSecJpaTableInfoService cFSecTableInfoService;
+
+	@Autowired
 	private CFSecJpaISOCcyService cFSecISOCcyService;
 
 	@Autowired
@@ -176,6 +179,14 @@ public class CFSecJpaTestTestSchema {
 		}
 		else {
 			messages.append("Retrieved " + tenantResults.size() + " entities from CFSec.Tenant\n");
+		}
+
+		List<?> tableInfoResults = cFSecTableInfoService.findAll();
+		if (tableInfoResults == null) {
+			messages.append("Erroneously retrieved null for CFSecTableInfoService.findAll()\n");
+		}
+		else {
+			messages.append("Retrieved " + tableInfoResults.size() + " entities from CFSec.TableInfo\n");
 		}
 
 		List<?> iSOCcyResults = cFSecISOCcyService.findAll();
